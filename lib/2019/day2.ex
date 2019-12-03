@@ -11,30 +11,20 @@ defmodule Advent201902 do
     |> execute_program(0)
   end
 
-  # hacky and brutish!
   def part2 do
     ops = read_program()
 
-    for noun <- 0..99 do
-      for verb <- 0..99 do
-        result =
-          ops
-          |> List.replace_at(1, noun)
-          |> List.replace_at(2, verb)
-          |> execute_program(0)
-
-        IO.puts("")
-
-        IO.inspect(noun, label: "noun")
-        IO.inspect(verb, label: "verb")
-
-        if(result == 19_690_720) do
-          throw(:break)
-        end
+    {n, v, _x} =
+      for noun <- 0..99, verb <- 0..99 do
+        {noun, verb,
+         ops
+         |> List.replace_at(1, noun)
+         |> List.replace_at(2, verb)
+         |> execute_program(0)}
       end
-    end
+      |> Enum.find(fn {_noun, _verb, x} -> x == 19_690_720 end)
 
-    [1, 4, 9, 16]
+    n * 100 + v
   end
 
   def execute_program(ops, pointer) do
