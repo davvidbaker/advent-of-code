@@ -14,15 +14,23 @@ defmodule Advent201902 do
   def part2 do
     ops = read_program()
 
-    {n, v, _x} =
+    outcomes =
       for noun <- 0..99, verb <- 0..99 do
-        {noun, verb,
-         ops
-         |> List.replace_at(1, noun)
-         |> List.replace_at(2, verb)
-         |> execute_program(0)}
+        [
+          noun,
+          verb,
+          ops
+          |> List.replace_at(1, noun)
+          |> List.replace_at(2, verb)
+          |> execute_program(0)
+        ]
       end
-      |> Enum.find(fn {_noun, _verb, x} -> x == 19_690_720 end)
+
+    [n, v, _x] =
+      outcomes
+      |> Enum.find(fn [_noun, _verb, x] -> x == 19_690_720 end)
+
+    Advent.output_file(outcomes, 2019, 2)
 
     n * 100 + v
   end
@@ -64,21 +72,5 @@ defmodule Advent201902 do
     |> List.first()
     |> String.split(",")
     |> Enum.map(&String.to_integer/1)
-  end
-
-  def fuel_given_mass(mass) do
-    mass
-    |> Integer.floor_div(3)
-    |> Kernel.-(2)
-  end
-
-  def fuel_given_mass_recursive(mass) do
-    fuel = fuel_given_mass(mass)
-
-    if fuel > 0 do
-      fuel + fuel_given_mass_recursive(fuel)
-    else
-      0
-    end
   end
 end

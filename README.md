@@ -1,6 +1,14 @@
 # Advent
 
-**TODO: Add description**
+```
+mix run  -e AdventYYYYDD.run
+```
+
+Example:
+
+```elixir
+ mix run -e Advent201901.run
+```
 
 ## Installation
 
@@ -18,4 +26,3 @@ end
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/advent](https://hexdocs.pm/advent).
-
