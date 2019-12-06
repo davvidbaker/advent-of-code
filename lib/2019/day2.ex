@@ -1,7 +1,7 @@
 defmodule Advent201902 do
   def run do
     IO.inspect(part1())
-    IO.inspect(part2())
+    # IO.inspect(part2())
   end
 
   def part1 do
